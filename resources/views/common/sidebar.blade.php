@@ -11,12 +11,6 @@
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="index.html">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
-    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -50,8 +44,8 @@
         </a>
         <div id="collapse3" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="buttons.html">Danh sách thực đơn</a>
-                <a class="collapse-item" href="cards.html">Thêm thực đơn</a>
+                <a class="collapse-item" href="{{ route('admin.listThucdon') }}">Danh sách thực đơn</a>
+                <a class="collapse-item" href="{{ route('admin.createTD') }}">Thêm thực đơn</a>
             </div>
         </div>
     </li>
@@ -73,26 +67,23 @@
         </div>
     </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
     <div class="sidebar-heading">
-        Quản lý hóa đơn dịch vụ
+        Nhân viên dịch vụ
     </div>
-    <!-- Nav Item - Hóa đơn ăn uống -->
+
+    <!-- Nav Item - nhan vien -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHD1"
-            aria-expanded="true" aria-controls="collapseHD1">
-            <i class="fas fa-file-invoice-dollar"></i>
-            <span>Hóa đơn dịch vụ</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse7"
+            aria-expanded="true" aria-controls="collapse7">
+            <i class="fas fa-users"></i>
+            <span>Nhân viên DV</span>
         </a>
-        <div id="collapseHD1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapse7" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ route('admin.listHoaDon') }}">Danh sách hóa đơn</a>
-                <a class="collapse-item" href="cards.html">Thêm hóa đơn</a>
+                <a class="collapse-item" href="{{ route('admin.listNVDichvu') }}">Danh sách nhân viên</a>
             </div>
         </div>
     </li>
-
     
     {{-- <!-- Sidebar Message -->
     <div class="sidebar-card d-none d-lg-flex">

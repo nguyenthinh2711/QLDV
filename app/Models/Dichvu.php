@@ -11,7 +11,4 @@ class Dichvu extends Model
 {
     use HasFactory;
     protected $fillable = ['tendv','loaidv_id','giadv','chitiet','imgdv'];
-    public function CacHoadondv(){
-        return $this->BelongsToMany(Hoadondv::class);
-    }
 }

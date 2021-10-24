@@ -21,7 +21,6 @@
                         <option value="1" @if($monan->loaimon==1) {{ $select }} @endif>Khai vị</option>
                         <option value="2" @if($monan->loaimon==2) {{ $select }} @endif>Món chính</option>
                         <option value="3" @if($monan->loaimon==3) {{ $select }} @endif>Tráng miệng</option>
-                        <option value="4" @if($monan->loaimon==4) {{ $select }} @endif>Thức uống</option>
                       </select>
                   </div>
                   <div class="col">

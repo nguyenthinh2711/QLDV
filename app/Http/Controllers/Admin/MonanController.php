@@ -17,10 +17,16 @@ class MonanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $monans = Monan::paginate(5)->fragment('monans');
-        return view('QLDV.dsmonan')->with('monans',$monans);
+        if(isset($request->searchName)){
+            $name=$request->searchName;
+            $monans =  Monan::where('tenma','like','%'.$name.'%')->get();
+            return view('QLDV.dsmonan')->with('monans',$monans)->with('oldsearch',$name);
+        }else{
+            $monans = Monan::paginate(5)->fragment('monans');
+            return view('QLDV.dsmonan')->with('monans',$monans);
+        }
     }
 
     /**

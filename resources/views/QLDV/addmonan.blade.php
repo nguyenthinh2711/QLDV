@@ -21,7 +21,6 @@
                         <option value="1">Khai vị</option>
                         <option value="2">Món chính</option>
                         <option value="3">Tráng miệng</option>
-                        <option value="4">Thức uống</option>
                       </select>
                   </div>
                   <div class="col">

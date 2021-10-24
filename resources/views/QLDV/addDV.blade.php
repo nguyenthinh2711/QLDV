@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+
 <div class="tm-edit-product-row" >
   <div class="col-xl-6 col-lg-6 col-md-12" style="margin: 0 auto">
       <form action="{{ route('admin.storeDV') }}" method="POST">

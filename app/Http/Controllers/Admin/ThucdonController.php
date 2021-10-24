@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Monan;
 use App\Models\Thucdon;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,8 @@ class ThucdonController extends Controller
     public function index()
     {
         //
+        $thucdons = Thucdon::paginate(5)->fragment('thucdons');
+        return view('QLDV.listTD')->with('thucdons',$thucdons);
     }
 
     /**
@@ -26,6 +29,8 @@ class ThucdonController extends Controller
     public function create()
     {
         //
+        $monans = Monan::get();
+        return view('QLDV.addTD')->with('monans',$monans);
     }
 
     /**
@@ -37,6 +42,17 @@ class ThucdonController extends Controller
     public function store(Request $request)
     {
         //
+        //dd($request);
+        $validated = $request->validate([
+            'tentd' => 'required|unique:thucdons|max:255',
+        ]);
+        $monan_id = $request->monans;
+        $thucdon = new Thucdon;
+        $thucdon->tentd = $request->tentd;
+        $thucdon->ngaytd= $request->ngaytd;
+        $thucdon->save();
+        $thucdon->CacMonAn()->attach($monan_id);
+        return redirect()->route('admin.listThucdon');
     }
 
     /**
@@ -48,6 +64,9 @@ class ThucdonController extends Controller
     public function show(Thucdon $thucdon)
     {
         //
+        //dd($thucdon);
+        $monans = $thucdon->CacMonAn;
+        return view('QLDV.showTD')->with('monans',$monans)->with('thucdon',$thucdon);
     }
 
     /**
@@ -59,6 +78,11 @@ class ThucdonController extends Controller
     public function edit(Thucdon $thucdon)
     {
         //
+        $select = 'selected';
+        $checked = 'checked';
+        $monans = Monan::get();
+        $monandachons = $thucdon->CacMonAn;
+        return view('QLDV.editTD')->with('monans',$monans)->with('thucdon',$thucdon)->with('monandachons',$monandachons)->with('select',$select)->with('checked',$checked);
     }
 
     /**
@@ -71,6 +95,14 @@ class ThucdonController extends Controller
     public function update(Request $request, Thucdon $thucdon)
     {
         //
+        $thucdon->tentd = $request->tentd;
+        $thucdon->ngaytd= $request->ngaytd;
+        $thucdon->update();
+        $monan_id = $request->monans;
+        $thucdon->CacMonAn()->detach();
+        $thucdon->CacMonAn()->attach($monan_id);
+        $monans = $thucdon->CacMonAn;
+        return view('QLDV.showTD')->with('monans',$monans)->with('thucdon',$thucdon);
     }
 
     /**

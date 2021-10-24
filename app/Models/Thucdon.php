@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Thucdon extends Model
 {
     use HasFactory;
+    public function CacMonAn(){
+        return $this->BelongsToMany(Monan::class);
+    }
 }

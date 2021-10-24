@@ -19,23 +19,41 @@ class DichvuController extends Controller
         //
     }
 
-    public function dvsk()
+    public function dvsk(Request $request)
     {
         //
-        $dichvus =  Dichvu::where('loaidv_id','=',3)->paginate(5)->fragment('dichvus');
-        return view('QLDV.listDVSK')->with('dichvus',$dichvus);
+        if(isset($request->searchName)){
+            $name=$request->searchName;
+            $dichvus =  Dichvu::where('loaidv_id','=',3)->where('tendv','like','%'.$name.'%')->get();
+            return view('QLDV.listDVSK')->with('dichvus',$dichvus)->with('oldsearch',$name);
+        }else{
+            $dichvus =  Dichvu::where('loaidv_id','=',3)->paginate(5)->fragment('dichvus');
+            return view('QLDV.listDVSK')->with('dichvus',$dichvus);
+        }
     }
-    public function dvphong()
+    public function dvphong(Request $request)
     {
         //
-        $dichvus =  Dichvu::where('loaidv_id','=',1)->paginate(5)->fragment('dichvus');
-        return view('QLDV.listDVSK')->with('dichvus',$dichvus);
+        if(isset($request->searchName)){
+            $name=$request->searchName;
+            $dichvus =  Dichvu::where('loaidv_id','=',1)->where('tendv','like','%'.$name.'%')->get();
+            return view('QLDV.listDVP')->with('dichvus',$dichvus)->with('oldsearch',$name);
+        }else{
+            $dichvus =  Dichvu::where('loaidv_id','=',1)->paginate(5)->fragment('dichvus');
+            return view('QLDV.listDVP')->with('dichvus',$dichvus);
+        }
     }
-    public function dvanuong()
+    public function dvanuong(Request $request)
     {
         //
-        $dichvus =  Dichvu::where('loaidv_id','=',2)->paginate(5)->fragment('dichvus');
-        return view('QLDV.listDVSK')->with('dichvus',$dichvus);
+        if(isset($request->searchName)){
+            $name=$request->searchName;
+            $dichvus =  Dichvu::where('loaidv_id','=',2)->where('tendv','like','%'.$name.'%')->get();
+            return view('QLDV.listDVAU')->with('dichvus',$dichvus)->with('oldsearch',$name);
+        }else{
+            $dichvus =  Dichvu::where('loaidv_id','=',2)->paginate(5)->fragment('dichvus');
+            return view('QLDV.listDVAU')->with('dichvus',$dichvus);
+        }
     }
 
 

@@ -2,7 +2,21 @@
 
 @section('content')
 <div class="container-fluid">
-
+  <form action="{{ route('admin.listDvSK') }}" method="get">
+    @csrf
+    <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+      <div class="input-group">
+        <input type="search" name="searchName" placeholder="Nhập từ bạn cần tìm?" aria-describedby="button-addon1" class="form-control border-0 bg-light" value="@if (isset($oldsearch)){{ $oldsearch }} @endif">
+        <div class="input-group-append">
+          <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+    </div>
+  </form>
+  @if(!isset($dichvus[0]))
+  <h5>Không tìm thấy kết quả!</h5>
+  @endif
+  @if(isset($dichvus[0]))
       <table class="table">
         <thead class="thead-light">
           <tr>
@@ -23,7 +37,7 @@
               <td>{{ $dichvu->chitiet }}</td>
               <td>{{ $dichvu->loaidv_id }}</td>
               <td>{{ $dichvu->giadv }}</td>
-              <td>{{ $dichvu->imgdv }}</td>
+              <td><img style="width: 240px;"  src="{{ asset('storage/thumbnails/'.$dichvu->imgdv) }}" alt=""></td>
               <td style="text-align:justify;">
                 <a href="{{ route('admin.editdichvu',['dichvu' =>$dichvu]) }}" class="btn btn-primary" style="margin-right: 10px">sửa</a>
               </td>
@@ -38,6 +52,10 @@
           @endforeach
         </tbody>
       </table>
-      {{ $dichvus->links() }}
+      @if (!isset($oldsearch))
+      {{ $dichvus->links() }}        
+    @endif
+
+    @endif
 </div>
 @endsection
